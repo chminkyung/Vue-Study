@@ -7,9 +7,9 @@
 </head>
 <body>
 <div id="root">
-    <word-relay></word-relay>
-    <word-relay></word-relay>
-    <word-relay></word-relay>
+    <word-relay start-word="공주"></word-relay>
+    <word-relay start-word="강아지"></word-relay>
+    <word-relay start-word="민트초코"></word-relay>
 </div>
 </body>
 <script>
@@ -24,9 +24,10 @@
                 <div>{{result}}</div>
             </div>
         `,
+        props: ['startWord'],
         data() { // 데이터가 각각 컴포넌트마다 다르게 하기 위함
             return {
-                word: '공주',
+                word: this.startWord,
                 result: '',
                 value: '',
             }
