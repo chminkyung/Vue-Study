@@ -7,25 +7,29 @@
 </head>
 <body>
 <div id="root">
-    <word-relay />
-    <word-relay />
-    <word-relay />
+    <word-relay></word-relay>
+    <word-relay></word-relay>
+    <word-relay></word-relay>
 </div>
 </body>
 <script>
-    Vue.component('word-relay', {
+    Vue.component('word-relay', { // 전역 컴포넌트
         template: `
-            <div>{{word}}</div>
-            <form v-on:submit="onSubmitForm">
-                <input type="text" ref="answer" v-model="value">
-                <button type="submit">입력</button>
-            </form>
-            <div>{{result}}</div>
+            <div>
+                <div>{{word}}</div>
+                <form v-on:submit="onSubmitForm">
+                    <input type="text" ref="answer" v-model="value">
+                    <button type="submit">입력</button>
+                </form>
+                <div>{{result}}</div>
+            </div>
         `,
-        data: {
-            word: '공주',
-            result: '',
-            value: '',
+        data() { // 데이터가 각각 컴포넌트마다 다르게 하기 위함
+            return {
+                word: '공주',
+                result: '',
+                value: '',
+            }
         },
         methods: {
             onSubmitForm(e) {
