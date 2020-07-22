@@ -373,3 +373,5 @@ ex3/node_modules/yallist/
 ex3/node_modules/yargs-parser/
 ex3/node_modules/yargs/
 ex3/node_modules/which-module/
+ex3/dist/
+ex3/node_modules/.cache/
