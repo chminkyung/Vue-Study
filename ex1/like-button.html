@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>좋아요</title>
+</head>
+<body>
+<div id="root">
+    <div v-if="liked">좋아요 눌렀음</div>
+    <!--v가 붙으면 데이터나 메소드에 접근할 수 있다.-->
+    <button v-else v-on:click="onClickButton">Like</button>
+    <!--v-on : 뷰가 통제하는 메서드가 연결이 됨 === onClick-->
+    <!--v-if 와 v-else는 인접해야 함-->
+</div>
+</body>
+<script>
+    const app = new Vue({ // app = Vue의 인스턴스
+        el: '#root',
+        data: {
+            liked: false,
+        },
+        methods: {
+            onClickButton() {
+                this.liked = true; // this -> data
+            },
+        },
+    });
+</script>
+</html>
+
+
+<!--SPA : single page application-->
+<!--vue, react는 어떤 부분이 바뀌는가 파악하는 게 중요-->
+<!--data를 바꾸면 화면이 알아서 바뀜-->
