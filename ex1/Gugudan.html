@@ -8,12 +8,13 @@
 <body>
 <div id="root">
     <div>{{first}} X {{second}}는?</div>
-    <form>
-        <input type="number" v-model="value">
+    <form v-on:submit="onSubmitForm">
+        <input type="number" ref="answer" v-model="value">
         <!--input과 data value를 연결 === v-model-->
-        <button>입력</button>
+        <!--ref : input에 직접적으로 접근하기 위함-->
+        <button type="submit">입력</button>
     </form>
-    <div id="result"></div>
+    <div id="result">{{result}}</div>
 </div>
 </body>
 <script>
@@ -25,7 +26,22 @@
             value: '',
             result: '',
         },
-        methods: {}
+        methods: {
+            onSubmitForm(e) {
+                e.preventDefault();
+                if (this.first * this.second === parseInt(this.value)) {
+                    this.result="정답";
+                    this.first = Math.ceil(Math.random() * 9);
+                    this.second = Math.ceil(Math.random() * 9);
+                    this.value = '';
+                    this.$refs.answer.focus();
+                } else {
+                    this.result="댕";
+                    this.value='';
+                    this.$refs.answer.focus();
+                }
+            },
+        }
     })
 </script>
 </html>
