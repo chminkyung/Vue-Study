@@ -2,10 +2,12 @@
     <div>
        <div id="screen" :class="state" @click="onClickScreen">{{message}}</div>
         <!-- class에 데이터를 넣어주고 싶을때 v-bind === : -->
-        <div>
-            <p>평균 시간 : {{(result.reduce((a, c) => a + c, 0)) / result.length || 0}}ms</p>
+        <template v-show="result.length">
+        <!-- v-show : false === display:none -->
+        <!-- v-if : false === 주석 -->
+            <p>평균 시간 : {{average}}ms</p>
             <button @click="onReset">reset</button>
-        </div>
+        </template>
     </div>
 </template>
 <script>
@@ -19,6 +21,11 @@
                 result: [],
                 state: 'waiting',
                 message: '클릭해서 시작하세요.',
+            }
+        },
+        computed: { // 일반 데이터를 가공해서 쓸 때
+            average() {
+                return (this.result.reduce((a, c) => a + c, 0)) / this.result.length || 0
             }
         },
         methods: {
