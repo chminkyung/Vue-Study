@@ -3,12 +3,15 @@
        <div id="screen" :class="state" @click="onClickScreen">{{message}}</div>
         <!-- class에 데이터를 넣어주고 싶을때 v-bind === : -->
         <div>
-            <p>평균 시간 : {{}}</p>
+            <p>평균 시간 : {{(result.reduce((a, c) => a + c, 0)) / result.length || 0}}ms</p>
             <button @click="onReset">reset</button>
         </div>
     </div>
 </template>
 <script>
+    let startTime = 0;
+    let endTime = 0;
+    let timeOut = 0;
     // Vue.component
     export default {
         data() {
@@ -20,15 +23,26 @@
         },
         methods: {
             onReset() {
-
+                this.result = [];
             },
             onClickScreen() {
                 if (this.state === 'waiting') {
                     this.state = 'ready';
+                    this.message = '초록색이 되면 클릭하세요';
+                    timeOut = setTimeout(() => {
+                        this.state = 'now';
+                        this.message = '지금 클릭!';
+                        startTime = new Date();
+                    }, Math.floor(Math.random() * 1000) + 2000); // 2~3초
                 } else if (this.state === 'ready') {
-                    this.state = 'now'
-                } else if (this.state === 'now') {
+                    clearTimeout(timeOut);
                     this.state = 'waiting'
+                    this.message = '초록색이 된 후에 클릭하세요'
+                } else if (this.state === 'now') {
+                    endTime = new Date();
+                    this.state = 'waiting';
+                     this.message = '클릭해서 시작하세요.';
+                    this.result.push(endTime - startTime);
                 }
             }
         }
