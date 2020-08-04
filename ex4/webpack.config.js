@@ -15,6 +15,12 @@ module.exports = { // node의 module을 만들었다.
         rules: [{ // 어떻게 합칠지, 어떻게 처리할건지
             test: /\.vue$/, // 파일 명이 .vue로 끝나는 파일
             loader: 'vue-loader',
+        },{
+            test: /\.css$/,
+            loader: [
+                'vue-style-loader',
+                'css-loader',
+            ]
         }]
     },
     plugins: [ // 모듈들이 처리하다가 후처리,
@@ -23,5 +29,6 @@ module.exports = { // node의 module을 만들었다.
     output: {
         filename: '[name].js',
         path: path.join(__dirname, 'dist'), // 폴더 경로 path.join === 현재경로
+        publicPath: '/dist' // webpack-dev-server를 사용하기 위해서
     },
 };
